@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>AES Encryption & Decryption Tool</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+<main class="container">
+<header class="header">
+<h1 class="brand">🔐 AES Encryption & Decryption</h1>
+<p class="tag">Secure AES-ECB encryption and decryption with real-time visualization</p>
+</header>
+
+<div class="tabs">
+<button class="tab-btn active" data-tab="encrypt">Encrypt</button>
+<button class="tab-btn" data-tab="decrypt">Decrypt</button>
+</div>
+
+<!-- Encryption Section -->
+<section id="encrypt-section" class="tab-content active">
+<div class="card io-card">
+<div class="section-header">
+<h2>Encrypt Text</h2>
+<p class="section-desc">Enter your plaintext to encrypt</p>
+</div>
+
+<label for="inputText" class="label">
+<span>Plaintext Input</span>
+<span class="char-count" id="encrypt-char-count">0 characters</span>
+</label>
+<textarea id="inputText" placeholder="Type your message here..." class="input"></textarea>
+
+<div class="key-section">
+<label for="keyHex" class="label">
+<span>Encryption Key (Optional)</span>
+<span class="key-hint">Leave empty to use default key</span>
+</label>
+<input id="keyHex" class="key-input" placeholder="Enter hex key (32/48/64 hex chars for AES-128/192/256)" />
+</div>
+
+<div class="controls">
+<button id="encryptBtn" class="btn btn-primary">
+<span class="btn-icon">🔒</span>
+<span>Encrypt</span>
+</button>
+<button id="clearEncryptBtn" class="btn btn-secondary">Clear</button>
+</div>
+
+<div class="live-rows">
+<div class="live small">
+<strong>ASCII Values</strong>
+<div id="asciiView" class="mono"></div>
+</div>
+<div class="live small">
+<strong>Binary Representation</strong>
+<div id="binaryView" class="mono"></div>
+</div>
+</div>
+</div>
+
+<div class="card out-card">
+<div class="section-header">
+<h2>Encrypted Output</h2>
+</div>
+<div class="output-row">
+<div class="output-group">
+<label>Ciphertext (Hexadecimal)</label>
+<div class="output-container">
+<pre id="cipherHex" class="mono output"></pre>
+<button class="copy-btn" data-copy="cipherHex" title="Copy to clipboard">📋</button>
+</div>
+</div>
+<div class="output-group">
+<label>Ciphertext (Binary)</label>
+<div class="output-container">
+<pre id="cipherBin" class="mono output"></pre>
+<button class="copy-btn" data-copy="cipherBin" title="Copy to clipboard">📋</button>
+</div>
+</div>
+</div>
+
+<details class="details-section">
+<summary>Additional Details</summary>
+<div class="output-group">
+<label>Padded Plaintext (Hex)</label>
+<div class="output-container">
+<pre id="paddedHex" class="mono output"></pre>
+<button class="copy-btn" data-copy="paddedHex" title="Copy to clipboard">📋</button>
+</div>
+</div>
+</details>
+</div>
+</section>
+
+<!-- Decryption Section -->
+<section id="decrypt-section" class="tab-content">
+<div class="card io-card">
+<div class="section-header">
+<h2>Decrypt Ciphertext</h2>
+<p class="section-desc">Enter your hexadecimal ciphertext to decrypt</p>
+</div>
+
+<label for="decryptInput" class="label">
+<span>Ciphertext Input (Hexadecimal)</span>
+<span class="char-count" id="decrypt-char-count">0 characters</span>
+</label>
+<textarea id="decryptInput" placeholder="Paste hex ciphertext here (e.g., 4a8f3c2d1e5b6a7c...)" class="input"></textarea>
+
+<div class="key-section">
+<label for="decryptKeyHex" class="label">
+<span>Decryption Key (Optional)</span>
+<span class="key-hint">Must match the key used for encryption</span>
+</label>
+<input id="decryptKeyHex" class="key-input" placeholder="Enter hex key (32/48/64 hex chars for AES-128/192/256)" />
+</div>
+
+<div class="controls">
+<button id="decryptBtn" class="btn btn-primary">
+<span class="btn-icon">🔓</span>
+<span>Decrypt</span>
+</button>
+<button id="clearDecryptBtn" class="btn btn-secondary">Clear</button>
+</div>
+</div>
+
+<div class="card out-card">
+<div class="section-header">
+<h2>Decrypted Output</h2>
+</div>
+<div class="output-row">
+<div class="output-group">
+<label>Decrypted Plaintext</label>
+<div class="output-container">
+<pre id="decryptedText" class="mono output"></pre>
+<button class="copy-btn" data-copy="decryptedText" title="Copy to clipboard">📋</button>
+</div>
+</div>
+</div>
+
+<div class="output-row">
+<div class="output-group">
+<label>ASCII Values</label>
+<div class="output-container">
+<pre id="decryptAscii" class="mono output"></pre>
+<button class="copy-btn" data-copy="decryptAscii" title="Copy to clipboard">📋</button>
+</div>
+</div>
+<div class="output-group">
+<label>Binary Representation</label>
+<div class="output-container">
+<pre id="decryptBinary" class="mono output"></pre>
+<button class="copy-btn" data-copy="decryptBinary" title="Copy to clipboard">📋</button>
+</div>
+</div>
+</div>
+
+<details class="details-section">
+<summary>Additional Details</summary>
+<div class="output-group">
+<label>Padded Plaintext (Hex)</label>
+<div class="output-container">
+<pre id="decryptPaddedHex" class="mono output"></pre>
+<button class="copy-btn" data-copy="decryptPaddedHex" title="Copy to clipboard">📋</button>
+</div>
+</div>
+</details>
+</div>
+</section>
+
+<div class="notification" id="notification"></div>
+
+<footer class="footer">
+<small>⚠️ ECB mode shown for demonstration only — not recommended for sensitive data in production.</small>
+</footer>
+</main>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
