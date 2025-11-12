@@ -84,6 +84,8 @@ This project demonstrates AES encryption and decryption using the ECB (Electroni
 AES uses a single symmetric key for both encryption and decryption.
 
 In ECB mode, plaintext is divided into 16-byte blocks, and each block is encrypted independently with the same key.
+<img width="778" height="997" alt="image" src="https://github.com/user-attachments/assets/64e55dd1-e4e6-42f1-b5f1-d6dda171d434" />
+
 
 ⚠️ Important:
 ECB mode is not secure for real-world applications.
